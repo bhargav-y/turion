@@ -20,6 +20,9 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 if not all([DB_USER, DB_PASSWORD]):
     raise ValueError('Database credentials are not set')
 
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((UDP_IP, UDP_PORT))
+
 conn = psycopg2.connect(
     dbname=DB_NAME,
     user=DB_USER,
@@ -44,7 +47,7 @@ print("UDP server is up and listening for telemetry packets...")
 
 try:
     while True:
-        data, addr = socket.recvfrom(PACKET_SIZE)
+        data, addr = sock.recvfrom(PACKET_SIZE)
         if len(data) != PACKET_SIZE:
             print(f"Received packet of incorrect size from {addr}")
             continue
@@ -68,4 +71,4 @@ except KeyboardInterrupt:
 finally:
     cursor.close()
     conn.close()
-    socket.close()
+    sock.close()
