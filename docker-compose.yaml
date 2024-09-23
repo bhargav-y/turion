@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  udp_server:
+    build:
+      context: .
+      dockerfile: ./udp_server/Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5000:5000/udp"
+    networks:
+      - backend
+
+  api_server:
+    build:
+      context: .
+      dockerfile: ./api_server/Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  postgres_data:

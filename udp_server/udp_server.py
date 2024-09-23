@@ -12,10 +12,10 @@ PACKET_SIZE = struct.calcsize(PACKET_FORMAT)
 UDP_IP = '0.0.0.0'
 UDP_PORT = 5000
 
-DB_HOST = os.getenv('DB_HOST', 'localhost')
-DB_NAME = os.getenv('DB_NAME', 'telemetry')
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_HOST = os.getenv('POSTGRES_HOST', 'localhost')
+DB_NAME = os.getenv('POSTGRES_DB', 'telemetry')
+DB_USER = os.getenv('POSTGRES_USER')
+DB_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 
 if not all([DB_USER, DB_PASSWORD]):
     raise ValueError('Database credentials are not set')
