@@ -21,7 +21,7 @@ Run `python3 send_telemetry.py` to start sending telemetry data to the server.
 Example cURL request to see the telemetry data:
 
 ```
-curl 'http://localhost:8000/api/v1/telemetry
+curl 'http://localhost:8000/api/v1/telemetry'
 ```
 
 Example cURL request to get the telemetry data with pagination:
