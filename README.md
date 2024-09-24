@@ -31,3 +31,5 @@ Example cURL request to get the telemetry data with pagination:
 ```
 
 The default is page 1 with a page size of 10.
+
+**Note**: `database/init_db.py` was used for local development. This file can be ignored if you are using the `docker-compose.yaml` file.
