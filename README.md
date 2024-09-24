@@ -23,7 +23,6 @@ Example cURL request to see the telemetry data:
 ```
 curl 'http://localhost:8000/api/v1/telemetry
 ```
-Notice how the body is `routes` not `route`. This is how it is originally specified in the assessment.
 
 Example cURL request to get the telemetry data with pagination:
 
