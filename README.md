@@ -3,7 +3,7 @@
 First, create an `.env` file within project root with the following environment variables:
 
 ```
-POSTGRES_HOST=postgres
+POSTGRES_HOST="postgres"
 POSTGRES_USER="username"
 POSTGRES_PASSWORD="password"
 POSTGRES_DB="telemetry"
